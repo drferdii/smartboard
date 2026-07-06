@@ -1,0 +1,649 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* ==================================================
+     THEME: SOFT BLUSH / MILK TEA (DARI COLOR HUNT)
+     Palet: #FCF8F8, #FBEFEF, #F9DFDF, #F5AFAF
+     ================================================== */
+  --background: #FCF8F8; /* Warna latar paling terang dari palet (sangat lembut) */
+  --foreground: #594A4D; /* Coklat/Taupe pudar agar teks tidak kontras tajam (anti sakit mata) */
+
+  --card: #FFFFFF;
+  --card-foreground: #594A4D;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #594A4D;
+
+  --primary: #F5AFAF; /* Warna pink tergelap dari palet untuk tombol utama */
+  --primary-foreground: #594A4D; /* Teks harus gelap karena tombolnya pink pudar */
+
+  --secondary: #FBEFEF;
+  --secondary-foreground: #594A4D;
+
+  --muted: #FBEFEF;
+  --muted-foreground: #7A666A; /* Dibuat lebih gelap agar teks tidak hilang/menyatu dengan background */
+
+  --accent: #F9DFDF;
+  --accent-foreground: #594A4D;
+
+  --destructive: #F5AFAF;
+  --destructive-foreground: #594A4D;
+
+  --border: #F9DFDF; /* Border menggunakan pink pudar agar seamless */
+  --input: #FFFFFF;
+  --ring: #F5AFAF;
+
+  --radius: 0rem;
+
+  /* Sidebar Specific Tokens */
+  --sidebar-bg: #FBEFEF; /* Latar sidebar warna blush */
+  --sidebar-text: #594A4D;
+  --sidebar-muted: #998387;
+  --sidebar-accent: #F9DFDF;
+  --sidebar-accent-soft: #FCF8F8;
+
+  /* Brand Pinks */
+  --brand-pink: #F5AFAF;
+  --brand-pink-soft: #F9DFDF;
+  --brand-pink-bg: #FBEFEF;
+
+  /* Chart Colors */
+  --chart-1: oklch(35% 0.02 160);
+  --chart-2: oklch(65% 0.01 160);
+  --chart-3: oklch(78% 0.02 130);
+  --chart-4: oklch(55% 0.06 85);
+
+  --neu-shadow-dark: rgba(180, 160, 165, 0.22);
+  --neu-shadow-dark-strong: rgba(180, 160, 165, 0.28);
+  --neu-shadow-light: rgba(255, 255, 255, 0.95);
+  --neu-shadow-light-strong: rgba(255, 255, 255, 1);
+  --neu-highlight: rgba(255, 255, 255, 0.72);
+  --neu-surface: linear-gradient(145deg, #fffdfd 0%, #f8e9eb 100%);
+  --neu-surface-soft: linear-gradient(145deg, #fff9fa 0%, #fbedef 100%);
+  --neu-surface-accent: linear-gradient(145deg, #fff6f8 0%, #ffd7e3 100%);
+  --neu-surface-success: linear-gradient(145deg, #f9fffc 0%, #e7f6ee 100%);
+  --neu-surface-ink: linear-gradient(145deg, #4c4346 0%, #2b2427 100%);
+}
+
+@theme inline {
+  --font-sans: var(--font-sans-app), system-ui, sans-serif;
+  --font-mono: var(--font-mono-app), monospace;
+  --font-display: var(--font-display-app), system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 1px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-text: var(--sidebar-text);
+  --color-sidebar-muted: var(--sidebar-muted);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-soft: var(--sidebar-accent-soft);
+
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-pink-soft: var(--brand-pink-soft);
+  --color-brand-pink-bg: var(--brand-pink-bg);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ======================================
+   CUSTOM ANIMATIONS & EFFECTS
+   ====================================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-2%, -4%); }
+  20% { transform: translate(-4%, 2%); }
+  30% { transform: translate(2%, -6%); }
+  40% { transform: translate(-2%, 6%); }
+  50% { transform: translate(-4%, 4%); }
+  60% { transform: translate(4%, 0%); }
+  70% { transform: translate(0%, 4%); }
+  80% { transform: translate(1%, 8%); }
+  90% { transform: translate(-3%, 3%); }
+}
+
+@keyframes warmPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 79, 121, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 79, 121, 0);
+  }
+}
+
+@keyframes steamRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scaleX(1);
+  }
+  15% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.4;
+    transform: translateY(-20px) scaleX(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-40px) scaleX(0.8);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes pulseSoft {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.58s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 2.6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.animate-warm-pulse {
+  animation: warmPulse 2s ease-in-out infinite;
+}
+
+.animate-steam {
+  animation: steamRise 2s ease-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Grain overlay - VERY subtle, minimal movement */
+.grain-overlay::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.015;
+  pointer-events: none;
+  z-index: 99;
+  animation: grain 12s steps(8) infinite;
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px currentColor;
+  -webkit-text-fill-color: transparent;
+}
+
+.clip-diagonal {
+  clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
+}
+
+.clip-diagonal-reverse {
+  clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+}
+
+/* 3D perspective container for tilt effects */
+.perspective-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Glassmorphism surface — consistent translucent card treatment */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Gradient text for display headings */
+.gradient-heading {
+  background: linear-gradient(135deg, #1C1917 30%, #FF4F79 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* GPU acceleration for continuously animated elements */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Smooth ripple effect for maps */
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Pork restaurant specific warm glow */
+.warm-glow {
+  position: relative;
+}
+
+.warm-glow::after {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(circle, rgba(255, 194, 214, 0.3) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Food card hover effect */
+.food-card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.food-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(255, 79, 121, 0.15);
+}
+
+/* Menu card accent glow on hover */
+.menu-card-glow:hover {
+  border-color: rgba(255, 79, 121, 0.2);
+  box-shadow:
+    0 16px 40px rgba(28, 25, 23, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Mascot bounce animation */
+@keyframes mascotBounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-2deg);
+  }
+  75% {
+    transform: translateY(-4px) rotate(2deg);
+  }
+}
+
+.mascot-bounce {
+  animation: mascotBounce 3s ease-in-out infinite;
+}
+
+/* Oink comic text effect */
+@keyframes oinkBounce {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+}
+
+.oink-comic {
+  animation: oinkBounce 0.6s ease-in-out infinite;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  text-shadow: 2px 2px 0 #1C1917, -1px -1px 0 #1C1917;
+}
+
+/* Accessibility: disable continuous animations for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-pulse-soft,
+  .animate-float,
+  .mascot-bounce,
+  .oink-comic,
+  .animate-warm-pulse,
+  .animate-steam,
+  .animate-shimmer {
+    animation: none !important;
+  }
+  .grain-overlay::before {
+    animation: none !important;
+  }
+}
+
+/* ACARS / Transit Design Token Extensions */
+.grid-overlay {
+  position: fixed; inset: 0;
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: calc((100% - 80px) / 12) 40px;
+  pointer-events: none; z-index: -1;
+  max-width: 1440px; margin-inline: auto; padding-inline: 40px;
+  background-origin: content-box; background-clip: content-box; opacity: 0.12;
+}
+.branding-vertical { writing-mode: vertical-rl; text-orientation: mixed; }
+.font-display { font-family: var(--font-display); }
+
+.admin-font-sentrahub {
+  --font-sans: var(--font-sans-app), system-ui, sans-serif;
+  --font-display: var(--font-sans-app), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+
+  /* Redefinisi warna latar belakang bertema pink (Opsi 1) */
+  --background: #FBEFEF;
+  --sidebar-bg: #F8E6E6;
+
+  /* Redefinisi variabel font-size Tailwind v4 (dikurangi 1px) */
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 17px;
+  --text-xl: 19px;
+  --text-2xl: 23px;
+  --text-3xl: 29px;
+  --text-4xl: 35px;
+}
+
+.admin-font-sentrahub,
+.admin-font-sentrahub .font-sans {
+  font-family: var(--font-sans-app), system-ui, sans-serif;
+}
+
+.admin-font-sentrahub .font-display {
+  font-family: var(--font-sans-app), system-ui, sans-serif;
+}
+
+.admin-font-sentrahub .font-mono {
+  font-family: var(--font-mono-app), monospace;
+}
+
+.admin-font-sentrahub .page-overview,
+.admin-font-sentrahub .font-display,
+.admin-font-sentrahub .font-sans,
+.admin-font-sentrahub .font-mono {
+  text-rendering: optimizeLegibility;
+}
+
+/* Cegah tabrakan visual: sembunyikan branding global hanya ketika di halaman overview */
+body:has(.page-overview) .branding-global {
+  display: none !important;
+}
+
+/* ======================================
+   NEUMORPHISM (SOFT UI) BUTTONS & CHIPS
+   ====================================== */
+.neumorphic-input,
+.neumorphic-select {
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  background: var(--neu-surface);
+  box-shadow:
+    6px 6px 14px var(--neu-shadow-dark),
+    -6px -6px 14px var(--neu-shadow-light),
+    inset 1px 1px 0 var(--neu-highlight);
+  color: var(--foreground);
+}
+
+.neumorphic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+}
+
+/* Minimalist Action Buttons (Segi Empat) - Berlaku secara global untuk semua tombol aksi di admin */
+.admin-font-sentrahub button.tracking-widest,
+.admin-font-sentrahub .neumorphic-btn,
+.admin-font-sentrahub .neumorphic-btn-dark {
+  border-radius: 0px !important; /* Segi empat sempurna */
+}
+
+/* Light button style */
+.admin-font-sentrahub button.tracking-widest.bg-background,
+.admin-font-sentrahub button.tracking-widest.bg-transparent,
+.admin-font-sentrahub .neumorphic-btn {
+  border: 1.5px solid #1C1917 !important;
+  background: #ffffff !important;
+  box-shadow: 1.5px 1.5px 0px #1C1917 !important;
+  color: #1C1917 !important;
+  min-height: 2.5rem;
+  padding: 0.5rem 1.25rem;
+  font-weight: bold;
+  transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.admin-font-sentrahub button.tracking-widest.bg-background:hover,
+.admin-font-sentrahub button.tracking-widest.bg-transparent:hover,
+.admin-font-sentrahub .neumorphic-btn:hover {
+  background: #FFF0F3 !important;
+  border-color: #FF4F79 !important;
+  box-shadow: 2px 2px 0px #FF4F79 !important;
+  color: #FF4F79 !important;
+  transform: translateY(-1px) !important;
+}
+
+.admin-font-sentrahub button.tracking-widest.bg-background:active,
+.admin-font-sentrahub button.tracking-widest.bg-transparent:active,
+.admin-font-sentrahub .neumorphic-btn:active {
+  background: #FAF6F0 !important;
+  box-shadow: 0px 0px 0px #1C1917 !important;
+  transform: translateY(1.5px) translateX(1.5px) !important;
+}
+
+.admin-font-sentrahub button.tracking-widest:disabled,
+.admin-font-sentrahub .neumorphic-btn:disabled {
+  opacity: 0.5 !important;
+  background: #f5f5f5 !important;
+  border-color: rgba(28, 25, 23, 0.2) !important;
+  box-shadow: none !important;
+  transform: none !important;
+  cursor: not-allowed !important;
+}
+
+.admin-font-sentrahub .neumorphic-input:focus-visible,
+.admin-font-sentrahub .neumorphic-select:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(255, 79, 121, 0.18),
+    6px 6px 14px var(--neu-shadow-dark),
+    -6px -6px 14px var(--neu-shadow-light),
+    inset 1px 1px 0 var(--neu-highlight);
+}
+
+/* Minimalist Status Chips (Segi Empat) */
+.neumorphic-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+  min-height: 1.9rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 0px !important; /* Segi empat sempurna */
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  background: var(--neu-surface-soft);
+  border: 1px solid rgba(28, 25, 23, 0.15) !important;
+  box-shadow: 1px 1px 0px rgba(28, 25, 23, 0.1) !important;
+  color: var(--foreground);
+}
+
+.neumorphic-chip[data-tone='accent'] {
+  background: var(--neu-surface-accent) !important;
+  border-color: rgba(255, 79, 121, 0.35) !important;
+  color: #b83c60 !important;
+}
+
+.neumorphic-chip[data-tone='success'] {
+  background: var(--neu-surface-success) !important;
+  border-color: rgba(33, 107, 81, 0.35) !important;
+  color: #216b51 !important;
+}
+
+.neumorphic-chip[data-tone='muted'] {
+  border-color: rgba(111, 96, 100, 0.35) !important;
+  color: #6f6064 !important;
+}
+
+.neumorphic-chip[data-tone='ink'] {
+  background: var(--neu-surface-ink) !important;
+  border-color: #1C1917 !important;
+  color: #fff6f8 !important;
+}
+
+.neumorphic-chip[data-depth='subtle'] {
+  box-shadow: 1px 1px 0px rgba(28, 25, 23, 0.06) !important;
+}
+
+.neumorphic-input,
+.neumorphic-select {
+  border-radius: 0px !important;
+  border: 1.5px solid #1C1917 !important;
+  box-shadow: 1.5px 1.5px 0px rgba(28, 25, 23, 0.15) !important;
+  transition:
+    box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 0.22s ease,
+    background 0.22s ease;
+}
+
+.neumorphic-input {
+  background: linear-gradient(145deg, #fffdfd 0%, #f8eff1 100%);
+}
+
+.neumorphic-select {
+  appearance: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8l4-3.5' fill='none' stroke='%23594A4D' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.25'/%3E%3C/svg%3E"),
+    linear-gradient(145deg, #fffdfd 0%, #f7eaed 100%);
+  background-position: right 0.85rem center, center;
+  background-repeat: no-repeat;
+  background-size: 0.7rem, 100%;
+}
+
+/* Minimalist Dark Button (Segi Empat) */
+.admin-font-sentrahub button.tracking-widest.bg-\[\#1C1917\],
+.admin-font-sentrahub button.tracking-widest.bg-foreground,
+.admin-font-sentrahub .neumorphic-btn-dark {
+  border: 1.5px solid #1C1917 !important;
+  background: #1C1917 !important;
+  color: #fff6f8 !important;
+  box-shadow: 1.5px 1.5px 0px #FF4F79 !important;
+  transition: all 0.15s cubic-bezier(0.2, 0.8, 0.2, 1) !important;
+}
+
+.admin-font-sentrahub button.tracking-widest.bg-\[\#1C1917\]:hover,
+.admin-font-sentrahub button.tracking-widest.bg-foreground:hover,
+.admin-font-sentrahub .neumorphic-btn-dark:hover {
+  border-color: #FF4F79 !important;
+  background: #FF4F79 !important;
+  box-shadow: 2px 2px 0px #1C1917 !important;
+  transform: translateY(-1px) !important;
+}
+
+.admin-font-sentrahub button.tracking-widest.bg-\[\#1C1917\]:active,
+.admin-font-sentrahub button.tracking-widest.bg-foreground:active,
+.admin-font-sentrahub .neumorphic-btn-dark:active {
+  background: #e63e64 !important;
+  border-color: #e63e64 !important;
+  box-shadow: 0px 0px 0px #1C1917 !important;
+  transform: translateY(1.5px) translateX(1.5px) !important;
+}
+
+/* Brand Text Neumorphism (Subtle letterpress look on light background) */
+.brand-text-neu {
+  text-shadow:
+    1px 1px 1px #ffffff,
+    -1.5px -1.5px 0.5px rgba(28, 25, 23, 0.15) !important;
+}
+
+/* Scroll indicators for responsive tables */
+.scroll-indicator-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.scroll-indicator-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 32px;
+  background: linear-gradient(to left, rgba(251, 239, 239, 0.9) 0%, rgba(251, 239, 239, 0) 100%);
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Hide scroll indicator when hovered or scrolled */
+.scroll-indicator-wrapper:hover::after {
+  opacity: 0.25;
+}

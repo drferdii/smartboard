@@ -1,0 +1,10 @@
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+minimumReleaseAgeExclude:
+  - '@ai-sdk/gateway@4.0.4'
+  - '@ai-sdk/mcp@2.0.3'
+  - '@ai-sdk/provider-utils@5.0.1'
+  - '@ai-sdk/react@4.0.5'
+  - ai@7.0.4

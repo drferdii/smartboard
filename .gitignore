@@ -1,0 +1,68 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env*
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# docs / planning / AI artifacts (not needed for deployment)
+/docs
+/ACTION-PLAN.md
+/FULL-AUDIT-REPORT.md
+/prd.md
+/prompt.md
+/spec.md
+/seo-report-localhost
+/check_sma.py
+/CLAUDE.md
+/admin-overview-*.png
+/semayot-overview-*.png
+/semayot-owner-chip-subtle.png
+/public/sentra_logomark_black.png
+/public/semayot/images/day.png
+/public/semayot/images/morning.png
+/public/semayot/images/night.png
+
+# scratch / temp
+/scratch
+/rumah-makan-semayot
+
+# superpowers
+/.superpowers
+/.agents
+/.mimocode
+/.gemini
+/.playwright-mcp
