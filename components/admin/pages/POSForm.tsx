@@ -11,6 +11,7 @@ import {
   Coins,
   Printer,
   Split,
+  Search,
 } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -37,6 +38,7 @@ export function POSForm() {
   const pathname = usePathname()
   const [items, setItems] = useState<MenuItem[]>([])
   const [cart, setCart] = useState<CartItem[]>([])
+  const [searchQuery, setSearchQuery] = useState('')
   const [paidInput, setPaidInput] = useState('')
   const [paidCents, setPaidCents] = useState(0)
   const [customerPhone, setCustomerPhone] = useState('')
@@ -208,7 +210,11 @@ export function POSForm() {
     return 'makanan_besar'
   }
 
-  const itemsByCategory = items.reduce<Record<string, MenuItem[]>>((acc, item) => {
+  const filteredItems = searchQuery.trim()
+    ? items.filter((item) => item.name.toLowerCase().includes(searchQuery.trim().toLowerCase()))
+    : items
+
+  const itemsByCategory = filteredItems.reduce<Record<string, MenuItem[]>>((acc, item) => {
     const customCat = getCustomCategory(item)
     ;(acc[customCat] ??= []).push(item)
     return acc
@@ -291,6 +297,27 @@ export function POSForm() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* COLUMN 1: Menu Items Grid (lg:col-span-7) */}
         <div className="lg:col-span-7 space-y-6">
+          {/* Menu Search Bar */}
+          <div className="flex items-center gap-2 border border-border bg-card px-4 py-2.5">
+            <Search className="w-4 h-4 text-muted-foreground shrink-0" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Cari menu makanan / minuman..."
+              className="w-full bg-transparent font-mono text-xs text-foreground focus:outline-none placeholder:text-muted-foreground/70"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="font-mono text-[9px] font-black uppercase text-muted-foreground hover:text-foreground shrink-0 cursor-pointer"
+              >
+                CLEAR
+              </button>
+            )}
+          </div>
+
           {/* Menu Catalog Header with Happy Hour Toggle */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-card border border-border p-4 gap-3">
             <div className="flex flex-col">
@@ -317,6 +344,21 @@ export function POSForm() {
               HAPPY HOUR {happyHourActive ? 'AKTIF (20% OFF MINUMAN)' : 'NONAKTIF'}
             </button>
           </div>
+
+          {filteredItems.length === 0 && searchQuery.trim() && (
+            <div className="border border-dashed border-border bg-card p-10 text-center">
+              <p className="font-mono text-[10px] font-black uppercase text-muted-foreground tracking-widest">
+                Tidak ada menu yang cocok dengan &ldquo;{searchQuery}&rdquo;.
+              </p>
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                className="mt-3 font-mono text-[9px] font-black uppercase text-[#FF4F79] hover:underline cursor-pointer tracking-widest"
+              >
+                RESET PENCARIAN
+              </button>
+            </div>
+          )}
 
           {categoryOrder.map((cat) => {
             const catItems = itemsByCategory[cat]

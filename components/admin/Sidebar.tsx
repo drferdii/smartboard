@@ -13,6 +13,7 @@ import {
   LogOut,
   Users,
   Heart,
+  Wallet,
 } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -31,6 +32,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '/admin/menu', label: 'Menu', icon: UtensilsCrossed, roles: ['owner'] },
   { href: '/admin/pos', label: 'Kasir', icon: Calculator, roles: ['owner', 'staff'] },
   { href: '/admin/transactions', label: 'Transaksi', icon: Receipt, roles: ['owner', 'staff'] },
+  { href: '/admin/financials', label: 'Keuangan', icon: Wallet, roles: ['owner'] },
   { href: '/admin/reports', label: 'Laporan', icon: TrendingUp, roles: ['owner'] },
   { href: '/admin/customers', label: 'Pelanggan', icon: Users, roles: ['owner'] },
   { href: '/admin/customers/trends', label: 'Tren & Kepuasan', icon: Heart, roles: ['owner'] },
